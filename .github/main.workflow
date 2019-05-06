@@ -9,7 +9,6 @@ action "ballerina-platform/github-actions/cli/latest@master" {
   secrets = [
     "docker_username",
     "docker_password",
-    "KUBE_CONFIG_DATA",
   ]
 }
 
@@ -17,4 +16,5 @@ action "actions/aws/kubectl@master" {
   uses = "actions/aws/kubectl@master"
   needs = ["ballerina-platform/github-actions/cli/latest@master"]
   args = "apply -f /github/workspace/kubernetes/"
+  secrets = ["KUBE_CONFIG_DATA"]
 }
