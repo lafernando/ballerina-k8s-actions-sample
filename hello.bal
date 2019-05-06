@@ -17,13 +17,13 @@ listener http:Listener hx = new(8080);
 @http:ServiceConfig {
     basePath: "/"
 }
-service serviceName on hx {
+service hellosvc on hx {
 
     @http:ResourceConfig {
         path: "/"
     }
     resource function hello(http:Caller caller, http:Request request) returns error? {
-        check caller->respond("Hello, Jack!");
+        check caller->respond("Hello, John!");
     }
 
 }
