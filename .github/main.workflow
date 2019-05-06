@@ -1,9 +1,9 @@
 workflow "Build & Deploy" {
   on = "push"
-  resolves = ["actions/aws/kubectl@master"]
+  resolves = ["K8s Deploy"]
 }
 
-action "ballerina-platform/github-actions/cli/latest@master" {
+action "Ballerina Build" {
   uses = "ballerina-platform/github-actions/cli/latest@master"
   args = "build"
   secrets = [
@@ -12,9 +12,9 @@ action "ballerina-platform/github-actions/cli/latest@master" {
   ]
 }
 
-action "actions/aws/kubectl@master" {
+action "K8s Deploy" {
   uses = "actions/aws/kubectl@master"
-  needs = ["ballerina-platform/github-actions/cli/latest@master"]
   args = "apply -f /github/workspace/kubernetes/"
   secrets = ["KUBE_CONFIG_DATA"]
+  needs = ["Ballerina Build"]
 }
