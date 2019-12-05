@@ -23,4 +23,4 @@ jobs:
         uses: actions/aws/kubectl@master
         with:
           args: apply -f /github/workspace/kubernetes/
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
