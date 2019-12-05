@@ -1,12 +1,10 @@
 import ballerina/http;
-import ballerinax/kubernetes;
+import ballerina/kubernetes;
 
 @kubernetes:Service {
     serviceType: "LoadBalancer",
     port: 80
 }
-listener http:Listener hx = new(8080);
-
 @kubernetes:Deployment {
     image: "$env{docker_username}/ballerina-k8s-actions-sample-$env{GITHUB_SHA}",
     push: true,
@@ -17,7 +15,7 @@ listener http:Listener hx = new(8080);
 @http:ServiceConfig {
     basePath: "/"
 }
-service hellosvc on hx {
+service hellosvc on new http:Listener(8080) {
 
     @http:ResourceConfig {
         path: "/"
