@@ -1,0 +1,26 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        
+      - name: Ballerina Build
+        uses: ballerina-platform/github-actions/cli/latest@master
+        with:
+          args: 
+            build hello.bal
+          docker_username: ${{ secrets.docker_username }}
+          docker_password: ${{ secrets.docker_password }}
+                      
+      - name: AWS Kubectl
+        uses: actions/aws/kubectl@master
+        with:
+          args: apply -f /github/workspace/kubernetes/
+          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }
