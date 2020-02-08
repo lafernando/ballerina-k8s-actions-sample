@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v1
         
       - name: Ballerina Build
-        uses: ballerina-platform/github-actions/cli/latest@master
+        uses: ballerina-platform/ballerina-action/@1.1.1
         with:
           args: 
             build hello.bal
