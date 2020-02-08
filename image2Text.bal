@@ -1,10 +1,10 @@
 import ballerina/http;
 import ballerina/kubernetes;
-import ballerina/config;
+import ballerina/system;
 import wso2/azurecv;
 
 azurecv:Configuration conf = {
-    key: config:getAsString("CV_KEY"),
+    key: system:getEnv("CV_KEY"),
     region: "eastus"
 };
 
@@ -14,15 +14,13 @@ azurecv:Client cvClient = new(conf);
     serviceType: "LoadBalancer",
     port: 80
 }
-@kubernetes:ConfigMap {
-    conf: "ballerina.conf"
-}
 @kubernetes:Deployment {
     image: "$env{docker_username}/ballerina-k8s-actions-sample-$env{GITHUB_SHA}",
     push: true,
     username: "$env{docker_username}",
     password: "$env{docker_password}",
-    imagePullPolicy: "Always"
+    imagePullPolicy: "Always",
+    env: { "CV_KEY": "$env{CV_KEY}" }
 }
 @http:ServiceConfig {
     basePath: "/image2Text"
