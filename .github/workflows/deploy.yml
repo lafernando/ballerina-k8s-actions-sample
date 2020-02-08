@@ -15,7 +15,7 @@ jobs:
         uses: ballerina-platform/ballerina-action/@1.1.1
         with:
           args: 
-            build hello.bal
+            build image2Text.bal
         env: 
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
