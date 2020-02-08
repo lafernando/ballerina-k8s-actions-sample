@@ -16,6 +16,7 @@ jobs:
         with:
           args: 
             build hello.bal
+        env: 
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
                       
@@ -23,4 +24,5 @@ jobs:
         uses: actions/aws/kubectl@master
         with:
           args: apply -f /github/workspace/kubernetes/
+        env: 
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
