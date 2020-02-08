@@ -23,5 +23,5 @@ jobs:
       - name: Kubectl
         uses: danielr1996/kubectl-action@1.0.0
         with:
-          args: apply -f /github/workspace/kubernetes/
+          args: apply -f $GITHUB_WORKSPACE/kubernetes/
           kubeconfig: ${{ secrets.KUBE_CONFIG_DATA }}
