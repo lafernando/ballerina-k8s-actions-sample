@@ -19,6 +19,7 @@ jobs:
         env: 
           docker_username: ${{ secrets.docker_username }}
           docker_password: ${{ secrets.docker_password }}
+          CV_KEY: ${{ secrets.CV_KEY }}
                       
       - name: Kubectl
         uses: danielr1996/kubectl-action@1.0.0
